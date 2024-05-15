@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="in.dminc.StudentMapper">
+
+    <resultMap id="result" type="in.dminc.Student">
+        <result property="studentId" column="STUDENT_ID"/>
+        <result property="studentName" column="STUDENT_NAME"/>
+    </resultMap>
+
+    <select id="getAllStudents" resultMap="result">
+        SELECT STUDENT_ID,
+               STUDENT_NAME
+        FROM STUDENT
+    </select>
+
+    <select id="retrieveAllStudents" resultType="in.dminc.StudentResult">
+        SELECT *
+        FROM STUDENT
+    </select>
+
+    <select id="getStudentById" parameterType="int" resultMap="result">
+        SELECT *
+        FROM STUDENT
+        WHERE STUDENT_ID = #{ID};
+    </select>
+</mapper>

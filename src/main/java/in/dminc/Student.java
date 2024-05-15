@@ -1,0 +1,1 @@
+package in.dminc;import lombok.AllArgsConstructor;import lombok.Getter;import lombok.Setter;@Getter@Setter@AllArgsConstructorpublic class Student {    private String studentId;    private String studentName;}
