@@ -31,4 +31,8 @@ public class StudentService {
 
         return studentsGroupedByGender;
     }
+
+    public List<StudentResult> getStudentByName(String studentName) {
+        return studentMapper.getStudentByName(studentName);
+    }
 }

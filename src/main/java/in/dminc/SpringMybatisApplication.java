@@ -17,7 +17,6 @@ public class SpringMybatisApplication implements CommandLineRunner {
 
     Logger logger = LoggerFactory.getLogger(SpringMybatisApplication.class);
 
-
     @Autowired
     StudentService studentService;
 
@@ -28,19 +27,26 @@ public class SpringMybatisApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         List<Student> allStudents = studentService.getAllStudents();
-        logger.info(allStudents.toString());
-
         Objects.requireNonNull(allStudents)
-            .forEach(student -> logger.info(student.getStudentId() + " : " + student.getStudentName()));
+            .forEach(student -> logger.info(String.format("%s :: %s", student.getStudentId(), student.getStudentName())));
 
         logger.info("\n");
 
-        Student student = studentService.getStudentById(1);
-        logger.info(student.getStudentId() + ":" + student.getStudentName());
+        Student student = studentService.getStudentById(2);
+        if (null != student) {
+            logger.info(String.format("%s : %s", student.getStudentId(), student.getStudentName()));
+        }
 
         logger.info("\n");
 
         Map<String, List<StudentResult>> studentsGroupedByGender = studentService.retrieveAllStudents();
-        studentsGroupedByGender.forEach((key, value) -> logger.info(key + ":" + value.stream().map(StudentResult::getStudentName).collect(Collectors.toSet())));
+        studentsGroupedByGender.forEach((key, value) -> logger.info(String.format("%s : %s", key, value.stream().map(StudentResult::getStudentName).collect(Collectors.toSet()))));
+
+        logger.info("\n");
+
+        List<StudentResult> students = studentService.getStudentByName("John Doe");
+        for (StudentResult studentResult : students) {
+            logger.info(String.format("%s - %s", studentResult.getStudentId(), studentResult.getStudentName()));
+        }
     }
 }

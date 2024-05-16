@@ -5,11 +5,13 @@
     <resultMap id="result" type="in.dminc.Student">
         <result property="studentId" column="STUDENT_ID"/>
         <result property="studentName" column="STUDENT_NAME"/>
+        <result property="dateOfBirth" column="DATE_OF_BIRTH"/>
+        <result property="dateOfJoining" column="DATE_OF_JOINING"/>
+        <result property="gender" column="GENDER"/>
     </resultMap>
 
     <select id="getAllStudents" resultMap="result">
-        SELECT STUDENT_ID,
-               STUDENT_NAME
+        SELECT *
         FROM STUDENT
     </select>
 
@@ -21,6 +23,12 @@
     <select id="getStudentById" parameterType="int" resultMap="result">
         SELECT *
         FROM STUDENT
-        WHERE STUDENT_ID = #{ID};
+        WHERE STUDENT_ID = #{ID}
+    </select>
+
+    <select id="getStudentByName" parameterType="String" resultType="in.dminc.StudentResult">
+        SELECT *
+        FROM STUDENT
+        WHERE STUDENT_NAME = #{STUDENT_NAME}
     </select>
 </mapper>

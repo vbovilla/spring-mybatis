@@ -13,4 +13,6 @@ public interface StudentMapper {
     Student getStudentById(int studentId);
 
     List<StudentResult> retrieveAllStudents();
+
+    List<StudentResult> getStudentByName(String studentName);
 }
